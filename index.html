@@ -55,55 +55,41 @@
         
     }
 </style>
-
 <body>
     <div>
         <span><input type="text"><button class="search-btn">Search</button></span>
         <img src="#">
         <button class="more-btn">Morrrreee</button>
     </div>
-    
     <script>
         const container=document.querySelector('div');
         const img=document.querySelector('img');
         const moreBtn=document.querySelector('.more-btn');
         const searchBtn=document.querySelector('.search-btn');
         const input=document.querySelector('input');
-        
         moreBtn.addEventListener('click',()=>{
-            let searchInput=input.value
+            let searchInput=input.value;
             apiCall(searchInput);
         });
-
         searchBtn.addEventListener('click',()=>{
-            let searchInput=input.value
+            let searchInput=input.value;
             apiCall(searchInput);
         })
-        
         async function apiCall(searchInput){
             if(searchInput!=''){
                 const response=await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=XPOvTBgP35rrBghwqbXgbR6a7lHS7fXR&s=${searchInput}`,{mode:'cors'})
                 const apiData=await response.json();
                 img.src=apiData.data.images.original.url;
             }
-            
-                else{
-                const response= await fetch('https://api.giphy.com/v1/gifs/translate?api_key=XPOvTBgP35rrBghwqbXgbR6a7lHS7fXR&s=cats',{mode:'cors'})
-                const apiData= await response.json();
-                img.src=apiData.data.images.original.url;
-                searchInput='';
-                }
-
+            else{
+            const response= await fetch('https://api.giphy.com/v1/gifs/translate?api_key=XPOvTBgP35rrBghwqbXgbR6a7lHS7fXR&s=cats',{mode:'cors'})
+            const apiData= await response.json();
+            img.src=apiData.data.images.original.url;
+            searchInput='';
+            }
         }
-        
         window.onload=function(){
-            fetch('https://api.giphy.com/v1/gifs/translate?api_key=XPOvTBgP35rrBghwqbXgbR6a7lHS7fXR&s=cats',{mode:'cors'})
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(response){
-            img.src=response.data.images.original.url;
-        });
+            apiCall('');
         }
     </script>
 </body>
